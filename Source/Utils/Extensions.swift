@@ -10,25 +10,29 @@ import Foundation
 import UIKit
 
 public extension NSObject {
-    class var nameOfClass: String {
+    /// Получает имя класса.
+    static var nameOfClass: String {
         return NSStringFromClass(self).components(separatedBy: ".").last!
     }
 }
 
-public extension UIViewController {
-    class func controller() -> Self {
-        let classReference = self.self
-        return classReference.init(nibName: self.nameOfClass, bundle: Bundle(for: self))
-    }
-}
-
 public extension UITableView {
+
+    /// Регистрирует ячейку по ее бандлу.
+    /// В качестве ключа используется имя класса ячейки.
+    ///
+    /// - Parameter cellType: Тип ясейки для регистрации.
     func registerNib(_ cellType: UITableViewCell.Type) {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: Bundle(for: cellType.self)), forCellReuseIdentifier: cellType.nameOfClass)
     }
 }
 
 public extension UICollectionView {
+    
+    /// Регистрирует ячейку по ее бандлу.
+    /// В качестве ключа используется имя класса ячейки.
+    ///
+    /// - Parameter cellType: Тип ясейки для регистрации.
     func registerNib(_ cellType: UICollectionViewCell.Type) {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: Bundle(for: cellType.self)), forCellWithReuseIdentifier: cellType.nameOfClass)
     }

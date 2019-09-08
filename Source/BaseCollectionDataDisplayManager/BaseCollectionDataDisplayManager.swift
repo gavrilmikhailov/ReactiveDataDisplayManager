@@ -70,7 +70,7 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
         guard let collection = collectionView else { return }
         generator.registerCell(in: collection)
 
-        guard let index = self.cellGenerators.index(where: { $0 === after }) else {
+        guard let index = self.cellGenerators.firstIndex(where: { $0 === after }) else {
             fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
         }
         self.cellGenerators.insert(generator, at: index + 1)
@@ -80,7 +80,7 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
         guard let collection = self.collectionView else { return }
         generators.forEach { $0.registerCell(in: collection) }
 
-        guard let index = self.cellGenerators.index(where: { $0 === after }) else {
+        guard let index = self.cellGenerators.firstIndex(where: { $0 === after }) else {
             fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
         }
         self.cellGenerators.insert(contentsOf: generators, at: index + 1)
@@ -88,7 +88,7 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
 
     public func update(generators: [CollectionCellGenerator]) {
         let indexes = generators.compactMap { [weak self] generator in
-            self?.cellGenerators.index(where: { $0 === generator })
+            self?.cellGenerators.firstIndex(where: { $0 === generator })
         }
         let indexPaths = indexes.compactMap { IndexPath(row: $0, section: 0) }
         self.collectionView?.reloadItems(at: indexPaths)

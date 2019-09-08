@@ -129,14 +129,14 @@ extension BaseTableDataDisplayManager {
             self.cellGenerators.append([TableCellGenerator]())
         }
 
-        if let index = self.sectionHeaderGenerators.index(where: { $0 === header }) {
+        if let index = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }) {
             self.cellGenerators[index].append(contentsOf: generators)
         }
     }
 
     /// Removes all cell generators from a given section
     public func removeAllGenerators(in header: TableHeaderGenerator) {
-        guard let index = self.sectionHeaderGenerators.index(where: { $0 === header }), self.cellGenerators.count > index else {
+        guard let index = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }), self.cellGenerators.count > index else {
             return
         }
 
@@ -162,7 +162,7 @@ public extension BaseTableDataDisplayManager {
     /// A constant that identifies a relative position in the table view (top, middle, bottom)
     /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
-    public func remove(_ generator: TableCellGenerator,
+    func remove(_ generator: TableCellGenerator,
                        with animation: UITableView.RowAnimation = .automatic,
                        needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                        needRemoveEmptySection: Bool = false) {
@@ -181,7 +181,7 @@ public extension BaseTableDataDisplayManager {
     ///   - after: Generator after which new generator will be added. Must be in the DDM.
     ///   - new: Generator which you want to insert after current generator.
     ///   - with: Animation for row action.
-    public func insert(after generator: TableCellGenerator,
+    func insert(after generator: TableCellGenerator,
                        new newGenerator: TableCellGenerator,
                        with animation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(generator) else { return }
@@ -194,7 +194,7 @@ public extension BaseTableDataDisplayManager {
     ///   - after: Generator before which new generator will be added. Must be in the DDM.
     ///   - new: Generator which you want to insert after current generator.
     ///   - with: Animation for row action.
-    public func insert(before generator: TableCellGenerator,
+    func insert(before generator: TableCellGenerator,
                        new newGenerator: TableCellGenerator,
                        with animation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(generator) else { return }
@@ -207,10 +207,10 @@ public extension BaseTableDataDisplayManager {
     ///   - to: Header before which new generator will be added. Must be in the DDM.
     ///   - new: Generator which you want to insert after current generator.
     ///   - with: Animation for row action.
-    public func insert(to header: TableHeaderGenerator,
+    func insert(to header: TableHeaderGenerator,
                        new generator: TableCellGenerator,
                        with animation: UITableView.RowAnimation = .automatic) {
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else { return }
+        guard let headerIndex = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }) else { return }
         self.insertGenerator(generator, at: (sectionIndex: headerIndex, generatorIndex: 0), with: animation)
     }
 
@@ -221,7 +221,7 @@ public extension BaseTableDataDisplayManager {
     ///   - newGenerator: Generator that should be added instead an old generator.
     ///   - removeAnimation: Animation for remove action.
     ///   - insertAnimation: Animation for insert action.
-    public func replace(oldGenerator: TableCellGenerator,
+    func replace(oldGenerator: TableCellGenerator,
                         on newGenerator: TableCellGenerator,
                         removeAnimation: UITableView.RowAnimation = .automatic,
                         insertAnimation: UITableView.RowAnimation = .automatic) {
@@ -244,7 +244,7 @@ public extension BaseTableDataDisplayManager {
     ///   - firstGenerator: Generator which must to move to new place. Must be in the DDM.
     ///   - secondGenerator: Generator which must to replaced with firstGenerator and move to it place.
     /// Must be in the DDM.
-    public func swap(generator firstGenerator: TableCellGenerator, with secondGenerator: TableCellGenerator) {
+    func swap(generator firstGenerator: TableCellGenerator, with secondGenerator: TableCellGenerator) {
         guard let firstIndex = findGenerator(firstGenerator), let secondIndex = findGenerator(secondGenerator) else { return }
 
         self.cellGenerators[firstIndex.sectionIndex].remove(at: firstIndex.generatorIndex)
@@ -305,7 +305,7 @@ private extension BaseTableDataDisplayManager {
 
     func findGenerator(_ generator: TableCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
         for (sectionIndex, section) in cellGenerators.enumerated() {
-            if let generatorIndex = section.index(where: { $0 === generator }) {
+            if let generatorIndex = section.firstIndex(where: { $0 === generator }) {
                 return (sectionIndex, generatorIndex)
             }
         }

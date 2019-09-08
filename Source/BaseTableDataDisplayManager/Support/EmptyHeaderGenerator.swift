@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Генератор заголовков-заглушек.
+/// Заголовок будет иметь минимальную высоту.
+/// Может быть полезен в случае, если нужно разделение по секциям, но заголовки не нужны. 
 public class EmptyTableHeaderGenerator: TableHeaderGenerator {
 
     open override func generate() -> UIView {

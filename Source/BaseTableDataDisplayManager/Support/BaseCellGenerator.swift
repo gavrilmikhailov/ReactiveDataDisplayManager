@@ -8,6 +8,16 @@
 
 import Foundation
 
+/// Этот объект реализует самый простой вариант работы генератора:
+/// - Сохранить модель
+/// - Создать ячейку
+/// - Сконфигурировать ячейку
+/// - Обработать нажатие на ячейку
+///
+/// ---
+///
+/// - Warning: **Не обязательно** наследоваться от этого класса.
+/// Он нужен просто для того, чтобы сократить дублирование
 public class BaseCellGenerator<Cell: Configurable>: SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Properties
@@ -25,7 +35,6 @@ public class BaseCellGenerator<Cell: Configurable>: SelectableItem where Cell: U
         self.model = model
         self.registerClass = registerClass
     }
-
 }
 
 // MARK: - TableCellGenerator
