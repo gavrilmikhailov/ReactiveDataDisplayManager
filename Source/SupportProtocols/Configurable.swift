@@ -10,5 +10,4 @@ public protocol Configurable where Self: UIView {
     ///
     /// - Parameter model: Данные для конфигурации.
     func configure(with model: Model)
-    
 }
