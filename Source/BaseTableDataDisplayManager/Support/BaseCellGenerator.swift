@@ -18,7 +18,7 @@ import Foundation
 ///
 /// - Warning: **Не обязательно** наследоваться от этого класса.
 /// Он нужен просто для того, чтобы сократить дублирование
-public class BaseCellGenerator<Cell: Configurable>: SelectableItem where Cell: UITableViewCell {
+public class BaseCellGenerator<Cell: Configurable>: SelectableGenerator where Cell: UITableViewCell {
 
     // MARK: - Properties
 
@@ -60,5 +60,4 @@ extension BaseCellGenerator: TableCellGenerator {
             tableView.registerNib(identifier)
         }
     }
-
 }

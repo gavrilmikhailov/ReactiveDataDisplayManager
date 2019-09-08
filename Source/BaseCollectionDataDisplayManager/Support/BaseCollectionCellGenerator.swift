@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class BaseCollectionCellGenerator<Cell: Configurable>: SelectableItem where Cell: UICollectionViewCell {
+public class BaseCollectionCellGenerator<Cell: Configurable>: SelectableGenerator where Cell: UICollectionViewCell {
 
     // MARK: - Properties
 
@@ -25,7 +25,6 @@ public class BaseCollectionCellGenerator<Cell: Configurable>: SelectableItem whe
         self.model = model
         self.registerClass = registerClass
     }
-
 }
 
 // MARK: - CollectionCellGenerator

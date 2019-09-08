@@ -35,7 +35,6 @@ open class BaseCollectionDataDisplayManager: NSObject {
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
     }
-
 }
 
 // MARK: - DataDisplayManager
@@ -101,7 +100,6 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     public func clearHeaderGenerators() {
         self.headerGenerators.removeAll()
     }
-
 }
 
 // MARK: - UICollectionViewDelegate
@@ -118,13 +116,12 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDelegate {
     }
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let selectable = self.cellGenerators[indexPath.row] as? SelectableItem else { return }
+        guard let selectable = self.cellGenerators[indexPath.row] as? SelectableGenerator else { return }
         selectable.didSelectEvent.invoke(with: ())
         if selectable.isNeedDeselect {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
     }
-
 }
 
 // MARK: - UITableViewDataSource
@@ -146,5 +143,4 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         return self.headerGenerators.first { $0.identifier == kind }?.generate() ?? UICollectionReusableView()
     }
-
 }

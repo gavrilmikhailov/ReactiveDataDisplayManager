@@ -1,7 +1,11 @@
 import Foundation
 
-/// Determinantes interface for interaction with any display manager.
-/// It can hide implementation of UITableView or UICollection view or your custom control with any data source.
+/// Описывает адаптер для коллекций.
+/// Имеет реализации для `UITableVew` и `UICollectionView`.
+/// Инкапсулирует логику работы с коллеций.
+/// Все манипуляции с данными должны быть инкапсулировану внутрь такого обьъекта.
+///
+/// Все манипуляции с UIView так же должны быть инкапсулированы внутрь адаптера.
 public protocol DataDisplayManager: class {
 
     // MARK:- Associatedtypes

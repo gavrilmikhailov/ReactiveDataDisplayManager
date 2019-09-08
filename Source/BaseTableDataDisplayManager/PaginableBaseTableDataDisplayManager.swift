@@ -13,5 +13,4 @@ open class PaginableBaseTableDataDisplayManager: BaseTableDataDisplayManager {
             lastCellShowingEvent.invoke(with: ())
         }
     }
-
 }

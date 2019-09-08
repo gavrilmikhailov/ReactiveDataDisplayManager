@@ -22,5 +22,4 @@ public class EmptyTableHeaderGenerator: TableHeaderGenerator {
     open override func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
         return 0.01
     }
-
 }

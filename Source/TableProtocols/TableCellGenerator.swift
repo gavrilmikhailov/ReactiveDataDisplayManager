@@ -9,6 +9,8 @@ import Foundation
 /// ---
 ///
 /// Используется в связке с `ViewBuilder`
+///
+/// - Attention: Имеет реализацию по-умолчанию для `ViewBuilder`
 public protocol TableCellGenerator: class {
 
     /// Высота ячейки для UITableViewCell.
@@ -50,7 +52,6 @@ public extension TableCellGenerator {
     var estimatedCellHeight: CGFloat? {
         return nil
     }
-
 }
 
 public extension TableCellGenerator where Self: ViewBuilder {
@@ -68,5 +69,4 @@ public extension TableCellGenerator where Self: ViewBuilder {
     func registerCell(in tableView: UITableView) {
         tableView.registerNib(self.identifier)
     }
-
 }

@@ -48,7 +48,6 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
     }
-
 }
 
 // MARK: - Generator actions
@@ -147,7 +146,6 @@ extension BaseTableDataDisplayManager {
     public func addCellGenerator(_ generator: TableCellGenerator, toHeader header: TableHeaderGenerator) {
         addCellGenerators([generator], toHeader: header)
     }
-
 }
 
 // MARK: - TableView actions
@@ -256,7 +254,6 @@ public extension BaseTableDataDisplayManager {
 
         self.tableView?.reloadData()
     }
-
 }
 
 // MARK: - Private methods
@@ -312,7 +309,6 @@ private extension BaseTableDataDisplayManager {
         }
         return nil
     }
-
 }
 
 // MARK: - UITableViewDelegate
@@ -380,7 +376,7 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let selectable = cellGenerators[indexPath.section][indexPath.row] as? SelectableItem else { return }
+        guard let selectable = cellGenerators[indexPath.section][indexPath.row] as? SelectableGenerator else { return }
         selectable.didSelectEvent.invoke(with: ())
         if selectable.isNeedDeselect {
             tableView.deselectRow(at: indexPath, animated: true)
@@ -390,7 +386,6 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         self.scrollViewWillEndDraggingEvent.invoke(with: velocity)
     }
-
 }
 
 // MARK: - UITableViewDataSource
@@ -412,6 +407,5 @@ extension BaseTableDataDisplayManager: UITableViewDataSource {
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cellGenerators[indexPath.section][indexPath.row].generate(tableView: tableView, for: indexPath)
     }
-
 }
 
