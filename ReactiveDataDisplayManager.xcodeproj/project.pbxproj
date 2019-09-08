@@ -33,6 +33,7 @@
 		B97A88DC2325608200A49290 /* ViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97A88DB2325608200A49290 /* ViewBuilder.swift */; };
 		B97A88DE2325609700A49290 /* SelectableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97A88DD2325609700A49290 /* SelectableItem.swift */; };
 		B97A88E2232560F700A49290 /* DeletableGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97A88E1232560F700A49290 /* DeletableGenerator.swift */; };
+		B97A88E5232565C900A49290 /* MovableGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97A88E4232565C900A49290 /* MovableGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		B97A88DB2325608200A49290 /* ViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilder.swift; sourceTree = "<group>"; };
 		B97A88DD2325609700A49290 /* SelectableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableItem.swift; sourceTree = "<group>"; };
 		B97A88E1232560F700A49290 /* DeletableGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletableGenerator.swift; sourceTree = "<group>"; };
+		B97A88E4232565C900A49290 /* MovableGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 				8632735C21F0F7DA00620CEE /* Configurable.swift */,
 				B97A88DD2325609700A49290 /* SelectableItem.swift */,
 				B97A88E1232560F700A49290 /* DeletableGenerator.swift */,
+				B97A88E4232565C900A49290 /* MovableGenerator.swift */,
 			);
 			path = SupportProtocols;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				B97A88DE2325609700A49290 /* SelectableItem.swift in Sources */,
 				4F088BEF1F4E9F74006B7809 /* BaseTableDataDisplayManager.swift in Sources */,
 				8BAB778920BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift in Sources */,
+				B97A88E5232565C900A49290 /* MovableGenerator.swift in Sources */,
 				B97A88D2232554E400A49290 /* TableHeaderGenerator.swift in Sources */,
 				B97A88DA2325607000A49290 /* ViewGenerator.swift in Sources */,
 				86F35A2C21EE7B51009D3001 /* BaseCellGenerator.swift in Sources */,
