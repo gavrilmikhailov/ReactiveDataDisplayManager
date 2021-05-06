@@ -18,49 +18,20 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
         case .didSelect(let indexPath):
             guard
                 let generator = manager?.generators[indexPath.section][indexPath.row],
-                let foldable = generator as? FoldableItem
+                let foldable = generator as? FoldableItem & TableCellGenerator,
+                let foldingManager = manager as? FoldingTableManager
             else {
                 return
             }
 
             if foldable.isExpanded {
-                foldable.childGenerators.forEach { manager?.remove($0,
-                                                                   with: .none,
-                                                                   needScrollAt: nil,
-                                                                   needRemoveEmptySection: false)
-                }
+                foldingManager.collapseGenerator(foldable)
             } else {
-                addCellGenerators(foldable.childGenerators, after: generator, with: manager)
+                foldingManager.expandGenerator(foldable)
             }
-
-            foldable.isExpanded = !foldable.isExpanded
-            foldable.didFoldEvent.invoke(with: (foldable.isExpanded))
-
-            updateIfNeeded(foldable.childGenerators, with: manager)
         default:
             break
         }
-    }
-
-}
-
-// MARK: - Private Methods
-
-private extension TableFoldablePlugin {
-
-    func addCellGenerators(_ childGenerators: [TableCellGenerator],
-                           after generator: TableCellGenerator,
-                           with manager: BaseTableManager?) {
-        if let manager = manager as? ManualTableManager {
-            manager.insert(after: generator, new: childGenerators, with: .fade)
-        } else if let manager = manager as? GravityTableManager {
-            manager.addCellGenerators(childGenerators, after: generator)
-        }
-    }
-
-    func updateIfNeeded(_ childGenerators: [TableCellGenerator], with manager: BaseTableManager?) {
-        guard let manager = manager as? GravityTableManager else { return }
-        manager.update(generators: childGenerators)
     }
 
 }

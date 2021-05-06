@@ -57,6 +57,7 @@
 		5788B141230FE3165D18E375 /* FoldingTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F67AEE82355D88833995D /* FoldingTableDataDisplayManager.swift */; };
 		57C6EB206300AE1288A1C5EB /* ExtendableBaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76826CF24995B55F8FB4D7 /* ExtendableBaseTableDataDisplayManager.swift */; };
 		5801441139C90CD4830EAD87 /* DataDisplayCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF2D4A316627A53C0450D5 /* DataDisplayCompatible.swift */; };
+		59F6E180264415AE0051E90E /* FoldableTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F6E17F264415AE0051E90E /* FoldableTableManager.swift */; };
 		5AA184E6F716FFAC05B0672E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9373CF21992ACAF75BED6839 /* Event.swift */; };
 		5B750F268BCC50F4606FB6E2 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247D90B27F7B0F9C62593597 /* Animator.swift */; };
 		60A2304838070F80479104C6 /* ManualTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C6EACAA6CEAC3E52EF7D28 /* ManualTableManager.swift */; };
@@ -218,6 +219,7 @@
 		562A6BEF4D914F5C22954D8C /* FoldingTableDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingTableDataDisplayManagerTests.swift; sourceTree = "<group>"; };
 		57391D869FE128EAC31DD0A3 /* CollectionBuilderConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionBuilderConfigurable.swift; sourceTree = "<group>"; };
 		59615B0AE9A9444EDFEF8BF3 /* GravityTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityTableDataDisplayManager.swift; sourceTree = "<group>"; };
+		59F6E17F264415AE0051E90E /* FoldableTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableTableManager.swift; sourceTree = "<group>"; };
 		5D412694D2BF33F0DE836632 /* MovableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableItem.swift; sourceTree = "<group>"; };
 		5E2450325AF42511749AE2BB /* SelectableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableItem.swift; sourceTree = "<group>"; };
 		60EE49AED3D5DED8A60F7B2A /* ReactiveDataDisplayManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveDataDisplayManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -351,6 +353,7 @@
 				E67308D9FF3FE20C4B2B3320 /* BaseTableManager.swift */,
 				28C5C769102975271AAF998F /* GravityTableManager.swift */,
 				A3C6EACAA6CEAC3E52EF7D28 /* ManualTableManager.swift */,
+				59F6E17F264415AE0051E90E /* FoldableTableManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -958,6 +961,7 @@
 				DB3D7847CFF3AED602A98C59 /* DeletableItem.swift in Sources */,
 				84223B54CD7CC5D1B29F413A /* DiffableItem.swift in Sources */,
 				89FEC7EB675B5713A8704BBC /* DiffableTableDataSource.swift in Sources */,
+				59F6E180264415AE0051E90E /* FoldableTableManager.swift in Sources */,
 				93CD06A08811ED18ACF5FCDE /* DisplayableItem.swift in Sources */,
 				17E2EA49884D7B208FDE29A3 /* EmptyCollectionFooterGenarator.swift in Sources */,
 				DBBB266AF496D2AC36703D57 /* EmptyCollectionHeaderGenerator.swift in Sources */,
@@ -1157,7 +1161,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 7.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				SDKROOT = iphoneos;
@@ -1181,7 +1189,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 7.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				SDKROOT = iphoneos;
