@@ -64,7 +64,7 @@ public final class FoldingTableManager: ManualTableManager {
     /// - Parameters:
     ///   - generator: generator signed `FoldableItem` and `TableCellGenerator`
     public func collapseGenerator(_ generator: TableCellGenerator) {
-        guard let foldingGenerator = generator as? FoldableItem, !foldingGenerator.isExpanded else {
+        guard let foldingGenerator = generator as? FoldableItem, foldingGenerator.isExpanded else {
             return
         }
         foldingGenerator.childGenerators.forEach {
