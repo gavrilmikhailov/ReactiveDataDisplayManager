@@ -14,17 +14,35 @@ public final class FoldingTableManager: ManualTableManager {
 
     /// Expands all generators
     ///
-    /// - Parameters:
-    ///   - generators: generators signed `FoldableItem` and `TableCellGenerator`
-    public func expandGenerators(_ generators: [(FoldableItem & TableCellGenerator)]) {
-        generators.forEach { expandGenerator($0) }
+    public func expandAllGenerators() {
+        let allGenerators: [TableCellGenerator] = generators.flatMap { $0 }.filter {
+            $0 is (FoldableItem & TableCellGenerator)
+        }
+        expandGenerators(allGenerators)
     }
 
     /// Collapse all generators
     ///
+    public func collapseAllGenerators() {
+        let allGenerators: [TableCellGenerator] = generators.flatMap { $0 }.filter {
+            $0 is (FoldableItem & TableCellGenerator)
+        }
+        collapseGenerators(allGenerators)
+    }
+
+    /// Expands generators
+    ///
     /// - Parameters:
     ///   - generators: generators signed `FoldableItem` and `TableCellGenerator`
-    public func collapseGenerators(_ generators: [(FoldableItem & TableCellGenerator)]) {
+    public func expandGenerators(_ generators: [TableCellGenerator]) {
+        generators.forEach { expandGenerator($0) }
+    }
+
+    /// Collapse generators
+    ///
+    /// - Parameters:
+    ///   - generators: generators signed `FoldableItem` and `TableCellGenerator`
+    public func collapseGenerators(_ generators: [TableCellGenerator]) {
         generators.forEach { collapseGenerator($0) }
     }
 
@@ -32,31 +50,31 @@ public final class FoldingTableManager: ManualTableManager {
     ///
     /// - Parameters:
     ///   - generator: generator signed `FoldableItem` and `TableCellGenerator`
-    public func expandGenerator(_ generator: (FoldableItem & TableCellGenerator)) {
-        guard !generator.isExpanded else {
+    public func expandGenerator(_ generator: TableCellGenerator) {
+        guard let foldingGenerator = generator as? FoldableItem, !foldingGenerator.isExpanded else {
             return
         }
-        insert(after: generator, new: generator.childGenerators, with: .fade)
-        generator.isExpanded = !generator.isExpanded
-        generator.didFoldEvent.invoke(with: (generator.isExpanded))
+        insert(after: generator, new: foldingGenerator.childGenerators, with: .fade)
+        foldingGenerator.isExpanded = !foldingGenerator.isExpanded
+        foldingGenerator.didFoldEvent.invoke(with: (foldingGenerator.isExpanded))
     }
 
     /// Collapse generator
     ///
     /// - Parameters:
     ///   - generator: generator signed `FoldableItem` and `TableCellGenerator`
-    public func collapseGenerator(_ generator: (FoldableItem & TableCellGenerator)) {
-        guard generator.isExpanded else {
+    public func collapseGenerator(_ generator: TableCellGenerator) {
+        guard let foldingGenerator = generator as? FoldableItem, !foldingGenerator.isExpanded else {
             return
         }
-        generator.childGenerators.forEach {
+        foldingGenerator.childGenerators.forEach {
             remove($0,
             with: .none,
             needScrollAt: nil,
             needRemoveEmptySection: false)
         }
-        generator.isExpanded = !generator.isExpanded
-        generator.didFoldEvent.invoke(with: (generator.isExpanded))
+        foldingGenerator.isExpanded = !foldingGenerator.isExpanded
+        foldingGenerator.didFoldEvent.invoke(with: (foldingGenerator.isExpanded))
     }
 
 }
