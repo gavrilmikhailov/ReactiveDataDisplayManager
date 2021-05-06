@@ -6,10 +6,28 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+public struct TableFoldablePluginConfig {
+    var onlyOneExpanded: Bool
+
+    public static func defaultConfig() -> Self {
+        return .init(onlyOneExpanded: true)
+    }
+}
+
 /// Plugin to support `FoldableItem`
 ///
 /// Allow  expand or collapse child cells
 public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
+
+    // MARK: - PrivateProperties
+
+    private var config: TableFoldablePluginConfig
+
+    // MARK: - Initialization
+
+    public init(config: TableFoldablePluginConfig) {
+        self.config = config
+    }
 
     // MARK: - BaseTablePlugin
 
@@ -24,11 +42,17 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
                 return
             }
 
+            if config.onlyOneExpanded {
+                foldingManager.collapseAllGenerators()
+            }
+
             if foldable.isExpanded {
                 foldingManager.collapseGenerator(foldable)
             } else {
                 foldingManager.expandGenerator(foldable)
             }
+        case .willDisplayCell(let indexPath):
+            print(4)
         default:
             break
         }
@@ -43,8 +67,8 @@ public extension BaseTablePlugin {
     /// Plugin to support `FoldableItem`
     ///
     /// Allow  expand or collapse child cells
-    static func foldable() -> TableFoldablePlugin {
-        .init()
+    static func foldable(config: TableFoldablePluginConfig = TableFoldablePluginConfig.defaultConfig()) -> TableFoldablePlugin {
+        .init(config: config)
     }
 
 }
