@@ -42,13 +42,12 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
                 return
             }
 
-            if config.onlyOneExpanded {
-                foldingManager.collapseAllGenerators()
-            }
-
             if foldable.isExpanded {
                 foldingManager.collapseGenerator(foldable)
             } else {
+                if config.onlyOneExpanded {
+                    foldingManager.collapseAllGenerators()
+                }
                 foldingManager.expandGenerator(foldable)
             }
         case .willDisplayCell(let indexPath):
