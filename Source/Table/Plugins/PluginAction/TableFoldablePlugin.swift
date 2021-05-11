@@ -7,6 +7,7 @@
 //
 
 public struct TableFoldablePluginConfig {
+
     var onlyOneExpanded: Bool
 
     public static func defaultConfig() -> Self {
