@@ -69,9 +69,9 @@ public final class FoldingTableManager: ManualTableManager {
         }
         foldingGenerator.childGenerators.forEach {
             remove($0,
-            with: .none,
-            needScrollAt: nil,
-            needRemoveEmptySection: false)
+                   with: .fade,
+                   needScrollAt: nil,
+                   needRemoveEmptySection: false)
         }
         foldingGenerator.isExpanded = !foldingGenerator.isExpanded
         foldingGenerator.didFoldEvent.invoke(with: (foldingGenerator.isExpanded))
