@@ -56,7 +56,7 @@ public final class FoldingTableManager: ManualTableManager {
         }
         insert(after: generator, new: foldingGenerator.childGenerators, with: .fade)
         foldingGenerator.isExpanded = !foldingGenerator.isExpanded
-        foldingGenerator.didFold(foldingGenerator.isExpanded)
+        foldingGenerator.didFold?(foldingGenerator.isExpanded)
         //foldingGenerator.didFoldEvent.invoke(with: (foldingGenerator.isExpanded))
     }
 
@@ -75,7 +75,7 @@ public final class FoldingTableManager: ManualTableManager {
                    needRemoveEmptySection: false)
         }
         foldingGenerator.isExpanded = !foldingGenerator.isExpanded
-        foldingGenerator.didFold(foldingGenerator.isExpanded)
+        foldingGenerator.didFold?(foldingGenerator.isExpanded)
         //foldingGenerator.didFoldEvent.invoke(with: (foldingGenerator.isExpanded))
     }
 

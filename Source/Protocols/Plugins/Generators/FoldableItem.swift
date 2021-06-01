@@ -12,7 +12,7 @@ import UIKit
 public protocol FoldableItem: class {
 
     /// Invokes when cell `didSelect`
-    var didFold: ((Bool) -> Void) { get }
+    var didFold: ((Bool) -> Void)? { get }
 
     /// Invokes when cell `didSelect`
     var didFoldEvent: BaseEvent<Bool> { get }
