@@ -10,6 +10,10 @@ public struct TableFoldablePluginConfig {
 
     var onlyOneExpanded: Bool
 
+    public init(onlyOneExpanded: Bool) {
+        self.onlyOneExpanded = onlyOneExpanded
+    }
+
     public static func defaultConfig() -> Self {
         return .init(onlyOneExpanded: true)
     }
@@ -20,7 +24,7 @@ public struct TableFoldablePluginConfig {
 /// Allow  expand or collapse child cells
 public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
 
-    // MARK: - PrivateProperties
+    // MARK: - Private Properties
 
     private var config: TableFoldablePluginConfig
 
