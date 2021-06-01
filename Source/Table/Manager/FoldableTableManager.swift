@@ -57,6 +57,11 @@ public final class FoldingTableManager: ManualTableManager {
         insert(after: generator, new: foldingGenerator.childGenerators, with: .fade)
         foldingGenerator.isExpanded = !foldingGenerator.isExpanded
         foldingGenerator.didFold?(foldingGenerator.isExpanded)
+
+        guard let index = findGenerator(generator) else {
+            return
+        }
+        view.scrollToRow(at: .init(row: index.generatorIndex, section: index.sectionIndex), at: .top, animated: true)
         //foldingGenerator.didFoldEvent.invoke(with: (foldingGenerator.isExpanded))
     }
 
