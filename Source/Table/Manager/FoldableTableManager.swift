@@ -50,7 +50,7 @@ public final class FoldingTableManager: ManualTableManager {
     ///
     /// - Parameters:
     ///   - generator: generator signed `FoldableItem` and `TableCellGenerator`
-    public func expandGenerator(_ generator: TableCellGenerator) {
+    public func expandGenerator(_ generator: TableCellGenerator, needScroll: Bool = false) {
         guard let foldingGenerator = generator as? FoldableItem, !foldingGenerator.isExpanded else {
             return
         }
@@ -58,11 +58,10 @@ public final class FoldingTableManager: ManualTableManager {
         foldingGenerator.isExpanded = !foldingGenerator.isExpanded
         foldingGenerator.didFold?(foldingGenerator.isExpanded)
 
-        guard let index = findGenerator(generator) else {
+        guard let index = findGenerator(generator), needScroll else {
             return
         }
         view.scrollToRow(at: .init(row: index.generatorIndex, section: index.sectionIndex), at: .top, animated: true)
-        //foldingGenerator.didFoldEvent.invoke(with: (foldingGenerator.isExpanded))
     }
 
     /// Collapse generator
@@ -81,7 +80,6 @@ public final class FoldingTableManager: ManualTableManager {
         }
         foldingGenerator.isExpanded = !foldingGenerator.isExpanded
         foldingGenerator.didFold?(foldingGenerator.isExpanded)
-        //foldingGenerator.didFoldEvent.invoke(with: (foldingGenerator.isExpanded))
     }
 
 }

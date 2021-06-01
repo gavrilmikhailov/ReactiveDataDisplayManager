@@ -9,13 +9,15 @@
 public struct TableFoldablePluginConfig {
 
     var onlyOneExpanded: Bool
+    var needScrollToExpanded: Bool
 
-    public init(onlyOneExpanded: Bool) {
+    public init(onlyOneExpanded: Bool, needScrollToExpanded: Bool) {
         self.onlyOneExpanded = onlyOneExpanded
+        self.needScrollToExpanded = needScrollToExpanded
     }
 
     public static func defaultConfig() -> Self {
-        return .init(onlyOneExpanded: true)
+        return .init(onlyOneExpanded: false, needScrollToExpanded: false)
     }
 }
 
@@ -47,14 +49,13 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
                 return
             }
 
-            if foldable.isExpanded {
+            guard !foldable.isExpanded else {
                 foldingManager.collapseGenerator(foldable)
-            } else {
-                if config.onlyOneExpanded {
-                    foldingManager.collapseAllGenerators()
-                }
-                foldingManager.expandGenerator(foldable)
+                return
             }
+
+            config.onlyOneExpanded ? foldingManager.collapseAllGenerators() : ()
+            foldingManager.expandGenerator(foldable, needScroll: config.needScrollToExpanded)
         default:
             break
         }

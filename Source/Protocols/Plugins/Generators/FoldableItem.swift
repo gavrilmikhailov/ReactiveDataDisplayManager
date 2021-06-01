@@ -15,6 +15,7 @@ public protocol FoldableItem: class {
     var didFold: ((Bool) -> Void)? { get }
 
     /// Invokes when cell `didSelect`
+    @available(*, deprecated, message: "Use didFold closure")
     var didFoldEvent: BaseEvent<Bool> { get }
 
     /// `true` if cell where expanded, `false` if cell where collapsed
