@@ -51,8 +51,6 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
                 }
                 foldingManager.expandGenerator(foldable)
             }
-        case .willDisplayCell(let indexPath):
-            print(4)
         default:
             break
         }
