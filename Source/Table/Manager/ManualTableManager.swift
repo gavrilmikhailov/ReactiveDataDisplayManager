@@ -360,9 +360,14 @@ private extension ManualTableManager {
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
                 with animation: UITableView.RowAnimation = .automatic) {
 
-        elements.forEach { [weak self] element in
-            element.generator.registerCell(in: view)
-            self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+        elements.enumerated().forEach { [weak self] index, element in
+
+            let delay = Int((Double(index) * 0.05) * 1000)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(delay)) { [weak self] in
+                guard let self = self else { return }
+                element.generator.registerCell(in: self.view)
+                self.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+            }
         }
 
         let indexPaths = elements.map {
