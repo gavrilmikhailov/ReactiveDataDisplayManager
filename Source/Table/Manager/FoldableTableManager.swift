@@ -54,7 +54,9 @@ public final class FoldingTableManager: ManualTableManager {
         guard let foldingGenerator = generator as? FoldableItem, !foldingGenerator.isExpanded else {
             return
         }
+        view.beginUpdates()
         insert(after: generator, new: foldingGenerator.childGenerators, with: .fade)
+        view.endUpdates()
         foldingGenerator.isExpanded = !foldingGenerator.isExpanded
         foldingGenerator.didFold?(foldingGenerator.isExpanded)
 

@@ -55,9 +55,7 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
             }
 
             config.onlyOneExpanded ? foldingManager.collapseAllGenerators() : ()
-            manager?.view.beginUpdates()
             foldingManager.expandGenerator(foldable, needScroll: config.needScrollToExpanded)
-            manager?.view.endUpdates()
         default:
             break
         }
