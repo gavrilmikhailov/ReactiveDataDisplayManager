@@ -54,14 +54,13 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
                 return
             }
 
-            if #available(iOS 11.0, *) {
-                manager?.view.performBatchUpdates({
-                    config.onlyOneExpanded ? foldingManager.collapseAllGenerators() : ()
-                    foldingManager.expandGenerator(foldable)
-                }, completion: { _ in
-                    manager?.view.scrollToRow(at: indexPath, at: .top, animated: false)
-                })
-            } 
+            config.onlyOneExpanded ? foldingManager.collapseAllGenerators() : ()
+            foldingManager.expandGenerator(foldable)
+
+            guard config.onlyOneExpanded else {
+                return
+            }
+            manager?.view.scrollToRow(at: indexPath, at: .top, animated: true)
         default:
             break
         }
