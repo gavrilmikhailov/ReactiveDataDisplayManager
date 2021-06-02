@@ -54,14 +54,9 @@ public final class FoldingTableManager: ManualTableManager {
         guard let foldingGenerator = generator as? FoldableItem, !foldingGenerator.isExpanded else {
             return
         }
-        insert(after: generator, new: foldingGenerator.childGenerators, with: .none)
+        insert(after: generator, new: foldingGenerator.childGenerators, with: .fade)
         foldingGenerator.isExpanded = !foldingGenerator.isExpanded
         foldingGenerator.didFold?(foldingGenerator.isExpanded)
-
-        guard let index = findGenerator(generator), needScroll else {
-            return
-        }
-        view.scrollToRow(at: .init(row: index.generatorIndex, section: index.sectionIndex), at: .top, animated: true)
     }
 
     /// Collapse generator
