@@ -57,7 +57,7 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
             config.onlyOneExpanded ? foldingManager.collapseAllGenerators() : ()
             foldingManager.expandGenerator(foldable)
 
-            guard config.onlyOneExpanded else {
+            guard config.needScrollToExpanded else {
                 return
             }
             manager?.view.scrollToRow(at: indexPath, at: .top, animated: true)
