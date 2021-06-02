@@ -58,9 +58,10 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
             foldingManager.expandGenerator(foldable)
 
             guard config.needScrollToExpanded else {
-                manager?.view.scrollToRow(at: indexPath, at: .top, animated: true)
                 return
             }
+
+            manager?.view.scrollToRow(at: indexPath, at: .top, animated: true)
         default:
             break
         }
