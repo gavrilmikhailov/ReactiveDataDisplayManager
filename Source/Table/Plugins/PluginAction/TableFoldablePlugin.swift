@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 public struct TableFoldablePluginConfig {
 
     var onlyOneExpanded: Bool
@@ -54,14 +56,18 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
                 return
             }
 
-            config.onlyOneExpanded ? foldingManager.collapseAllGenerators() : ()
-            foldingManager.expandGenerator(foldable)
+//            guard config.needScrollToExpanded else {
+//                return
+//            }
 
-            guard config.needScrollToExpanded else {
-                return
+            UIView.animate(withDuration: 0.3) {
+                manager?.view.scrollToRow(at: indexPath, at: .top, animated: false)
+            } completion: { (finished) in
+                self.config.onlyOneExpanded ? foldingManager.collapseAllGenerators() : ()
+                foldingManager.expandGenerator(foldable)
             }
 
-            manager?.view.scrollToRow(at: indexPath, at: .top, animated: false)
+
         default:
             break
         }
