@@ -63,7 +63,9 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
             else {
                 return
             }
-            manager?.view.scrollToRow(at: indexPath, at: .top, animated: true)
+            manager?.view.scrollToRow(at: .init(row: index.generatorIndex,
+                                                section: index.sectionIndex),
+                                      at: .top, animated: true)
         default:
             break
         }
