@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import Foundation
+
 public struct TableFoldablePluginConfig {
 
     var onlyOneExpanded: Bool
@@ -63,9 +65,11 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
             else {
                 return
             }
-            manager?.view.scrollToRow(at: .init(row: index.generatorIndex,
-                                                section: index.sectionIndex),
-                                      at: .top, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+                manager?.view.scrollToRow(at: .init(row: index.generatorIndex,
+                                                    section: index.sectionIndex),
+                                          at: .top, animated: true)
+            }
         default:
             break
         }
