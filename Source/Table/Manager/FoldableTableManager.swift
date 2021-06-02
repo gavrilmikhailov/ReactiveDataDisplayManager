@@ -50,7 +50,7 @@ public final class FoldingTableManager: ManualTableManager {
     ///
     /// - Parameters:
     ///   - generator: generator signed `FoldableItem` and `TableCellGenerator`
-    public func expandGenerator(_ generator: TableCellGenerator, needScroll: Bool = false) {
+    public func expandGenerator(_ generator: TableCellGenerator) {
         guard let foldingGenerator = generator as? FoldableItem, !foldingGenerator.isExpanded else {
             return
         }
