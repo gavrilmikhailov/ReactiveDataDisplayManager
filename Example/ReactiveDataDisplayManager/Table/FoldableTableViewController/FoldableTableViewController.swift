@@ -44,16 +44,16 @@ private extension FoldableTableViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
         // Add regular cell generators with titles
-        adapter.addCellGenerators(makeRegularCellWithTitlesGenerators())
+        adapter += makeRegularCellWithTitlesGenerators()
 
         // Add foldable cell generator to adapter
-        adapter.addCellGenerator(makeFoldableCellGenerator())
+        adapter += makeFoldableCellGenerator()
 
         // Add regular cell generators with titles
-        adapter.addCellGenerators(makeRegularCellWithTitlesGenerators())
+        adapter += makeRegularCellWithTitlesGenerators()
 
         // Add foldable cell generator to adapter
-        adapter.addCellGenerator(makeFoldableCellGenerator())
+        adapter += makeFoldableCellGenerator()
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()

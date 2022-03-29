@@ -39,7 +39,7 @@ private extension RefreshableTableViewController {
     func fillAdapter() {
 
         for _ in 0...3 {
-            adapter.addCellGenerator(makeGenerator())
+            adapter += makeGenerator()
         }
 
         adapter.forceRefill()
@@ -61,7 +61,7 @@ extension RefreshableTableViewController: RefreshableOutput {
 
             for _ in 0...3 {
                 if let generator = self?.makeGenerator() {
-                    self?.adapter.addCellGenerator(generator)
+                    self?.adapter += generator
                 }
             }
 

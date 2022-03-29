@@ -45,10 +45,10 @@ private extension MovableTableViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
         // Add generator to adapter
-        adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSection))
-        adapter.addCellGenerators(makeMovableCellGenerators())
-        adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSection))
-        adapter.addCellGenerators(makeMovableCellGenerators())
+        adapter += TitleHeaderGenerator(model: Constants.titleForSection)
+        adapter += makeMovableCellGenerators()
+        adapter += TitleHeaderGenerator(model: Constants.titleForSection)
+        adapter += makeMovableCellGenerators()
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()

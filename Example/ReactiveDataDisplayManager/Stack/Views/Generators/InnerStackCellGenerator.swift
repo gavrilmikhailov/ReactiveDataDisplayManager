@@ -45,7 +45,7 @@ extension InnerStackCellGenerator: ViewBuilder {
 
         let adapter = view.rddm.baseBuilder.build()
 
-        adapter.addCellGenerators(childGenerators)
+        adapter += childGenerators
 
         adapter.forceRefill()
     }

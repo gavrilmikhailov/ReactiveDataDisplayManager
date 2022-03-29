@@ -66,7 +66,7 @@ private extension MovableCollectionViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
         // Add generator to adapter
-        adapter.addCellGenerators(makeMovableCellGenerators())
+        adapter += makeMovableCellGenerators()
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
