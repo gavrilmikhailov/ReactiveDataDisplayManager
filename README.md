@@ -105,6 +105,8 @@ private extension MainTableViewController {
 
             // Add generator to adapter
             ddm.addCellGenerator(generator)
+            // or simple use operator `+=`
+            ddm += generator
         }
 
         ddm.forceRefill()
