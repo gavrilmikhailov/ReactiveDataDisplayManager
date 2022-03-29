@@ -8,7 +8,8 @@
 
 import UIKit
 
-extension DataDisplayManager {
+public extension DataDisplayManager {
+
     static func += (left: Self, right: CellGeneratorType) {
         left.addCellGenerator(right)
     }
@@ -16,4 +17,21 @@ extension DataDisplayManager {
     static func += (left: Self, right: [CellGeneratorType]) {
         left.addCellGenerators(right)
     }
+
+}
+
+public extension HeaderDataDisplayManager {
+
+    static func += (left: Self, right: HeaderGeneratorType) {
+        left.addSectionHeaderGenerator(right)
+    }
+
+}
+
+public extension FooterDataDisplayManager {
+
+    static func += (left: Self, right: FooterGeneratorType) {
+        left.addSectionFooterGenerator(right)
+    }
+
 }
