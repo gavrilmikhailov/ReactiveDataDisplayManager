@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class TableHeaderGenerator: ViewGenerator, IdOwner {
+open class TableHeaderGenerator: ViewGenerator, IdOwner, TableHeaderRegisterableItem {
 
     public let id: AnyHashable
 
@@ -22,6 +22,10 @@ open class TableHeaderGenerator: ViewGenerator, IdOwner {
 
     open func generate() -> UIView {
         preconditionFailure("\(#function) must be overriden in child")
+    }
+
+    open func registerHeader(in tableView: UITableView) {
+        tableView.register(Self.self, forHeaderFooterViewReuseIdentifier: descriptor)
     }
 
     open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
@@ -29,7 +33,7 @@ open class TableHeaderGenerator: ViewGenerator, IdOwner {
     }
 }
 
-open class TableFooterGenerator: ViewGenerator {
+open class TableFooterGenerator: ViewGenerator, TableFooterRegisterableItem {
 
     public let id: AnyHashable
 
@@ -43,6 +47,10 @@ open class TableFooterGenerator: ViewGenerator {
 
     open func generate() -> UIView {
         preconditionFailure("\(#function) must be overriden in child")
+    }
+
+    open func registerFooter(in tableView: UITableView) {
+        tableView.register(Self.self, forHeaderFooterViewReuseIdentifier: descriptor)
     }
 
     open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
@@ -51,7 +59,7 @@ open class TableFooterGenerator: ViewGenerator {
 }
 
 /// Protocol that incapsulated type of current cell
-public protocol TableCellGenerator: AnyObject {
+public protocol TableCellGenerator: AnyObject, TableCellRegisterableItem {
 
     /// Nib type, which create this generator
     var identifier: String { get }
@@ -61,11 +69,6 @@ public protocol TableCellGenerator: AnyObject {
     /// - Parameter tableView: TableView, which controlled cell grations
     /// - Return: New (may reused) cell.
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell
-
-    /// Register cell in tableView
-    ///
-    /// - Parameter in: TableView, in which cell will be registered
-    func registerCell(in tableView: UITableView)
 
     /// Height for cell.
     ///
