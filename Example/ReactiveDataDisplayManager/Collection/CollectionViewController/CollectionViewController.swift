@@ -43,7 +43,7 @@ class CollectionViewController: UIViewController {
                 debugPrint("\(title) selected")
             }
             // Add generator to adapter
-            adapter += generator
+            adapter += generator * header
         }
 
         // Tell adapter that we've changed generators

@@ -92,13 +92,11 @@ public extension TableCellGenerator {
 }
 
 /// Protocol that incapsulated type of Header
-public protocol CollectionHeaderGenerator: AnyObject {
+public protocol CollectionHeaderGenerator: AnyObject, CollectionHeaderRegisterableItem {
 
     var identifier: UICollectionReusableView.Type { get }
 
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView
-
-    func registerHeader(in collectionView: UICollectionView)
 
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize
 
@@ -117,19 +115,17 @@ public extension CollectionHeaderGenerator {
 }
 
 /// Protocol that incapsulated type of Footer
-public protocol CollectionFooterGenerator: AnyObject {
+public protocol CollectionFooterGenerator: AnyObject, CollectionFooterRegisterableItem {
 
     var identifier: UICollectionReusableView.Type { get }
 
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView
 
-    func registerFooter(in collectionView: UICollectionView)
-
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize
 }
 
 /// Protocol that incapsulated type of current cell
-public protocol CollectionCellGenerator: AnyObject {
+public protocol CollectionCellGenerator: AnyObject, CollectionCellRegisterableItem {
 
     /// Nib type, which create this generator
     var identifier: String { get }
@@ -139,11 +135,6 @@ public protocol CollectionCellGenerator: AnyObject {
     /// - Parameter tableView: TableView, which controlled cell grations
     /// - Return: New (may reused) cell.
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell
-
-    /// Register cell in collectionView
-    ///
-    /// - Parameter in: CollectionView, in which cell will be registered
-    func registerCell(in collectionView: UICollectionView)
 
     /// Method for SPM support
     /// 

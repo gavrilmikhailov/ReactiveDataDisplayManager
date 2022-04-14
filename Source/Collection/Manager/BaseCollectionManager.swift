@@ -25,12 +25,15 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
     public weak var view: UICollectionView!
     // swiftlint:enable implicitly_unwrapped_optional
 
+    private lazy var registrator: CollectionCellRegistrator = .init(view: view)
+
     var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?
 
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.reload()
     }
 
@@ -39,12 +42,10 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator]) {
-        generators.forEach { $0.registerCell(in: view) }
         addCollectionGenerators(with: generators, choice: .lastSection)
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], after: CollectionCellGenerator) {
-        generators.forEach { $0.registerCell(in: view) }
 
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
@@ -74,7 +75,6 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
 extension BaseCollectionManager: HeaderDataDisplayManager {
 
     public func addSectionHeaderGenerator(_ generator: CollectionHeaderGenerator) {
-        generator.registerHeader(in: view)
         addHeader(header: generator)
     }
 
@@ -83,8 +83,6 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], toHeader header: CollectionHeaderGenerator) {
-        generators.forEach { $0.registerCell(in: view) }
-
         guard let index = sections.firstIndex(where: { $0.header === header }) else { return }
         addCollectionGenerators(with: generators, choice: .byIndex(index))
     }
@@ -107,7 +105,6 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
 extension BaseCollectionManager: FooterDataDisplayManager {
 
     public func addSectionFooterGenerator(_ generator: CollectionFooterGenerator) {
-        generator.registerFooter(in: view)
         addFooter(footer: generator)
     }
 
@@ -116,8 +113,6 @@ extension BaseCollectionManager: FooterDataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], toFooter footer: CollectionFooterGenerator) {
-        generators.forEach { $0.registerCell(in: view) }
-
         guard let index = sections.firstIndex(where: { $0.footer === footer }) else { return }
         addCollectionGenerators(with: generators, choice: .byIndex(index))
     }
@@ -180,7 +175,6 @@ private extension BaseCollectionManager {
     func insert(elements: [(generator: CollectionCellGenerator, sectionIndex: Int, generatorIndex: Int)]) {
 
         elements.forEach { [weak self] element in
-            element.generator.registerCell(in: view)
             self?.sections[element.sectionIndex].generators.insert(element.generator, at: element.generatorIndex)
         }
 
@@ -188,6 +182,7 @@ private extension BaseCollectionManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.insertRows(at: indexPaths, with: .animated)
     }
 
