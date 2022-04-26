@@ -51,7 +51,7 @@ private extension MovableTableViewController {
         adapter += makeMovableCellGenerators()
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
         tableView.setEditing(true, animated: true)
     }
 

@@ -69,7 +69,7 @@ private extension MovableCollectionViewController {
         adapter += makeMovableCellGenerators()
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     // Create cells generators

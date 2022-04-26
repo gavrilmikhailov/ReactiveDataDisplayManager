@@ -102,7 +102,7 @@ private extension MainCollectionViewController {
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func openScreen(by segueId: SegueIdentifier) {

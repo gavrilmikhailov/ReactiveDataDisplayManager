@@ -56,7 +56,7 @@ private extension FoldableTableViewController {
         adapter += makeFoldableCellGenerator()
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func makeRegularCellWithTitlesGenerators() -> [TableCellGenerator] {
