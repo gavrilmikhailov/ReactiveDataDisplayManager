@@ -92,6 +92,8 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerator(_ generator: TableCellGenerator) {
+        guard view != nil else { return }
+
         generator.registerCell(in: view)
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
             self.cellGenerators.append([TableCellGenerator]())
@@ -115,6 +117,8 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
+        guard view != nil else { return }
+
         generators.forEach { $0.registerCell(in: view) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
