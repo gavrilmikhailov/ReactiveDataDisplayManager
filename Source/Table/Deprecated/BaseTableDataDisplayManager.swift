@@ -208,6 +208,19 @@ public extension BaseTableDataDisplayManager {
                              needRemoveEmptySection: needRemoveEmptySection)
     }
 
+    /// Removes generators from data display manager. Generators compares by references.
+    ///
+    /// - Parameters:
+    ///   - generators: Generators to delete.
+    ///   - animation: Animation for row action.
+    func remove(_ generators: [TableCellGenerator], with animation: UITableView.RowAnimation = .automatic) {
+        let indices = self.findGenerators(generators)
+        guard !indices.isEmpty else {
+            return
+        }
+        self.removeGenerators(with: indices, with: animation)
+    }
+
     /// Inserts new head generator.
     ///
     /// - Parameters:
@@ -496,6 +509,19 @@ private extension BaseTableDataDisplayManager {
         view.endUpdates()
     }
 
+    func removeGenerators(
+        with indices: [(sectionIndex: Int, generatorIndex: Int)],
+        with animation: UITableView.RowAnimation = .automatic
+    ) {
+        view.beginUpdates()
+        let indexPaths: [IndexPath] = indices.map { index in
+            self.cellGenerators[index.sectionIndex].remove(at: index.generatorIndex)
+            return IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+        }
+        view.deleteRows(at: indexPaths, with: animation)
+        view.endUpdates()
+    }
+
     func findGenerator(_ generator: TableCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
         for (sectionIndex, section) in cellGenerators.enumerated() {
             if let generatorIndex = section.firstIndex(where: { $0 === generator }) {
@@ -505,6 +531,16 @@ private extension BaseTableDataDisplayManager {
         return nil
     }
 
+    func findGenerators(_ generators: [TableCellGenerator]) -> [(sectionIndex: Int, generatorIndex: Int)] {
+        generators.compactMap { generator in
+            for (sectionIndex, section) in cellGenerators.enumerated() {
+                if let generatorIndex = section.firstIndex(where: { $0 === generator }) {
+                    return (sectionIndex, generatorIndex)
+                }
+            }
+            return nil
+        }
+    }
 }
 
 // MARK: - Scrolling
